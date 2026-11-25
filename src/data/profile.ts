@@ -14,7 +14,7 @@ export type LinkItem = {
 
 export const profile: Profile = {
   name: "김범중",
-  bio: "초보 바이브코더",
+  bio: "풀스택 개발자 \\ 요즘에는 AI 개발에 관심이 많아요",
   avatar: "/avatar.svg",
 };
 

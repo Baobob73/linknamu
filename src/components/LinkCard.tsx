@@ -22,14 +22,12 @@ export function LinkCard({ link, count, onClick }: Props) {
         </span>
       )}
       <span className="flex-1 truncate font-medium">{link.title}</span>
-      {typeof count === "number" && (
-        <span
-          className="shrink-0 rounded-full bg-emerald-50 px-2 py-0.5 text-xs tabular-nums text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300"
-          aria-label={`클릭 ${count}회`}
-        >
-          {count.toLocaleString("ko-KR")}
-        </span>
-      )}
+      <span
+        className="shrink-0 text-xs tabular-nums text-neutral-500 dark:text-neutral-400"
+        aria-label={`클릭 ${count}회`}
+      >
+        {(count ?? 0).toLocaleString("ko-KR")}회
+      </span>
     </a>
   );
 }

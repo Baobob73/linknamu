@@ -5,15 +5,22 @@ import type { LinkItem } from "@/data/profile";
 import { LinkCard } from "./LinkCard";
 
 export function LinkList({ links }: { links: LinkItem[] }) {
-  const [counts, setCounts] = useState<Record<string, number> | null>(null);
+  // 데이터를 받기 전에는 빈 객체 → 모든 카드가 0회로 표시됩니다.
+  const [counts, setCounts] = useState<Record<string, number>>({});
 
   useEffect(() => {
     let cancelled = false;
     fetch("/api/clicks")
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
-        // DB가 연결되지 않았으면 카운트 뱃지를 숨깁니다.
-        if (!cancelled && data?.enabled) setCounts(data.counts ?? {});
+        // 받아 온 값으로 갱신 (그 사이 클릭한 낙관적 증가분은 유지)
+        if (!cancelled && data?.counts) {
+          setCounts((prev) => {
+            const next: Record<string, number> = { ...data.counts };
+            for (const [id, n] of Object.entries(prev)) next[id] = (next[id] ?? 0) + n;
+            return next;
+          });
+        }
       })
       .catch(() => {});
     return () => {
@@ -35,7 +42,7 @@ export function LinkList({ links }: { links: LinkItem[] }) {
         keepalive: true,
       }).catch(() => {});
     }
-    setCounts((prev) => (prev ? { ...prev, [id]: (prev[id] ?? 0) + 1 } : prev));
+    setCounts((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
   }
 
   return (
@@ -44,7 +51,7 @@ export function LinkList({ links }: { links: LinkItem[] }) {
         <li key={link.id}>
           <LinkCard
             link={link}
-            count={counts ? counts[link.id] ?? 0 : undefined}
+            count={counts[link.id] ?? 0}
             onClick={handleClick}
           />
         </li>
