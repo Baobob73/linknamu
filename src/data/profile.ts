@@ -14,16 +14,16 @@ export type LinkItem = {
 
 export const profile: Profile = {
   name: "김범중",
-  bio: "풀스택 개발자 \\ 요즘에는 AI 개발에 관심이 많아요",
+  bio: "풀스택 개발자\n요즘에는 AI 개발에 관심이 많아요.",
   avatar: "/avatar.svg",
 };
 
 export const links: LinkItem[] = [
-  { id: "github", title: "GitHub", url: "https://github.com", emoji: "💻" },
-  { id: "blog", title: "기술 블로그", url: "https://velog.io", emoji: "✍️" },
-  { id: "instagram", title: "Instagram", url: "https://instagram.com", emoji: "📷" },
-  { id: "youtube", title: "YouTube 채널", url: "https://youtube.com", emoji: "▶️" },
-  { id: "email", title: "이메일 보내기", url: "mailto:hello@example.com", emoji: "✉️" },
+  { id: "github", title: "GitHub", url: "https://github.com/Baobob73/linknamu", emoji: "💻" },
+  { id: "blog", title: "기술 블로그", url: "https://blog.naver.com/kbj2461", emoji: "✍️" },
+  { id: "instagram", title: "Instagram", url: "https://www.instagram.com/baobob_73/", emoji: "📷" },
+  { id: "youtube", title: "YouTube 채널", url: "https://www.youtube.com/@kbj6487", emoji: "▶️" },
+  { id: "email", title: "이메일 보내기", url: "mailto:kbj6487@gmail.com", emoji: "✉️" },
 ];
 
 export const linkIds = new Set(links.map((l) => l.id));
